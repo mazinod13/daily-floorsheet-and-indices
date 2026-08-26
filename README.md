@@ -20,7 +20,7 @@ Files are named by the business date NEPSE assigns the session, not by the date 
 
 **Schedule**
 
-Sunday–Thursday, the NEPSE trading week, shortly after the 15:00 NPT close. Holidays produce no commit — if a date is missing, the market did not trade that day.
+Monday-Friday, the NEPSE trading week, shortly after the 15:00 NPT close. Holidays produce no commit — if a date is missing, the market did not trade that day.
 
 There is no backfill: the archive begins with the first successful run and grows forward.
 
@@ -28,19 +28,19 @@ There is no backfill: the archive begins with the first successful run and grows
 
 `data/floorsheet/YYYY-MM-DD.csv` — one row per trade, sorted by `contractId`:
 
-| Column | Notes |
-| --- | --- |
-| `contractId` | unique per trade, ascending through the session |
-| `businessDate` | trading date |
-| `tradeTime` | timestamp of the print |
-| `stockSymbol` | e.g. `NABIL` |
-| `securityName` | full company name |
-| `buyerMemberId` / `sellerMemberId` | broker IDs |
-| `contractQuantity` | shares |
-| `contractRate` | price per share |
-| `contractAmount` | quantity × rate |
-| `stockId` | NEPSE's internal security ID |
-| `tradeBookId` | NEPSE's internal trade ID |
+| Column                                 | Notes                                           |
+| -------------------------------------- | ----------------------------------------------- |
+| `contractId`                         | unique per trade, ascending through the session |
+| `businessDate`                       | trading date                                    |
+| `tradeTime`                          | timestamp of the print                          |
+| `stockSymbol`                        | e.g.`NABIL`                                   |
+| `securityName`                       | full company name                               |
+| `buyerMemberId` / `sellerMemberId` | broker IDs                                      |
+| `contractQuantity`                   | shares                                          |
+| `contractRate`                       | price per share                                 |
+| `contractAmount`                     | quantity × rate                                |
+| `stockId`                            | NEPSE's internal security ID                    |
+| `tradeBookId`                        | NEPSE's internal trade ID                       |
 
 `data/indices/YYYY-MM-DD.csv` — one row per index, sorted by name:
 
@@ -68,9 +68,7 @@ A full session is roughly 40,000 trades (~5 MB of CSV).
 
 **Source**
 
-[nepalstock.com.np](https://www.nepalstock.com.np) — NEPSE's own site, read through the JSON API its front end uses. No third-party aggregator.
-
-That API is undocumented and can change without notice, so treat this archive as best-effort. A missing date means either a market holiday or a failed run.
+[nepalstock.com.np](https://www.nepalstock.com.np) 
 
 **License**
 
