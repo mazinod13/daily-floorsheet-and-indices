@@ -5,24 +5,24 @@ Exchange, committed automatically after market close.
 
 <!-- BEGIN GENERATED -->
 
-**Latest trading day:** `2026-08-26`  
-**NEPSE Index:** 2,558.35 ▼ -1.38%  
-**Trades that session:** 61,442  
-**Indices recorded:** 17 (4 main + 13 sub)  
-**Trading days archived:** 1 (from `2026-08-26`)  
+**Latest trading day:** `2026-08-26`
+**NEPSE Index:** 2,558.35 ▼ -1.38%
+**Trades that session:** 61,442
+**Indices recorded:** 17 (4 main + 13 sub)
+**Trading days archived:** 1 (from `2026-08-26`)
 **Last updated:** 2026-08-26T10:52:53Z (2026-08-26 16:37 NPT)
 
 <!-- END GENERATED -->
 
 ## Layout
 
-| Path | What it holds |
-| --- | --- |
-| `floorsheet/<YYYY>/<YYYY-MM-DD>.csv.gz` | Every trade of that session, one row per contract |
-| `indices/<YYYY>/<YYYY-MM-DD>.json` | Raw API response for the main and sub indices |
-| `indices/daily.csv` | Append-only long series, one row per index per day |
-| `latest/floorsheet.csv.gz`, `latest/indices.json` | Most recent session, at a stable path |
-| `manifest.json` | Machine-readable summary of what is in here |
+| Path                                                  | What it holds                                      |
+| ----------------------------------------------------- | -------------------------------------------------- |
+| `floorsheet/<YYYY>/<YYYY-MM-DD>.csv.gz`             | Every trade of that session, one row per contract  |
+| `indices/<YYYY>/<YYYY-MM-DD>.json`                  | Raw API response for the main and sub indices      |
+| `indices/daily.csv`                                 | Append-only long series, one row per index per day |
+| `latest/floorsheet.csv.gz`, `latest/indices.json` | Most recent session, at a stable path              |
+| `manifest.json`                                     | Machine-readable summary of what is in here        |
 
 ## Floorsheet columns
 
@@ -53,8 +53,3 @@ and `previous_close` as *the previous session's* close on both fields, so they
 are preserved for completeness but are not the daily close. Sub-indices are
 served with a reduced field set (`current_value`, `change`, `per_change` only),
 so their `high`/`low`/52-week columns are empty.
-
-## Source
-
-Pulled from the official NEPSE API at <https://www.nepalstock.com.np>. This repo
-is generated data only; it is not affiliated with or endorsed by NEPSE.
