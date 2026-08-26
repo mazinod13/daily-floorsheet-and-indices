@@ -7,9 +7,10 @@ Exchange, committed automatically after market close.
 
 **Latest trading day:** `2026-08-26`  
 **NEPSE Index:** 2,558.35 ▼ -1.38%  
-**Floorsheet rows that day:** 61,442  
-**Trading days in this repo:** 1 (from `2026-08-26`)  
-**Last updated:** 2026-08-26T10:25:48Z (2026-08-26 16:10:48 NPT)
+**Trades that session:** 61,442  
+**Indices recorded:** 17 (4 main + 13 sub)  
+**Trading days archived:** 1 (from `2026-08-26`)  
+**Last updated:** 2026-08-26T10:52:53Z (2026-08-26 16:37 NPT)
 
 <!-- END GENERATED -->
 
