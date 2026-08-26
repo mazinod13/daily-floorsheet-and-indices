@@ -1,0 +1,168 @@
+{
+  "business_date": "2026-08-26",
+  "fetched_at_utc": "2026-08-26T10:25:48Z",
+  "indices": [
+    {
+      "auditId": null,
+      "change": -6.0,
+      "close": 457.68,
+      "currentValue": 451.66,
+      "exchangeIndexId": null,
+      "fiftyTwoWeekHigh": 507.0,
+      "fiftyTwoWeekLow": 435.29,
+      "generatedTime": "2026-08-26T15:20:05.223",
+      "high": 457.74,
+      "id": 57,
+      "index": "Sensitive Index",
+      "low": 450.0186,
+      "perChange": -1.31,
+      "previousClose": 451.6691
+    },
+    {
+      "auditId": null,
+      "change": -35.92,
+      "close": 2594.28,
+      "currentValue": 2558.35,
+      "exchangeIndexId": null,
+      "fiftyTwoWeekHigh": 2960.4,
+      "fiftyTwoWeekLow": 2487.18,
+      "generatedTime": "2026-08-26T15:20:05.223",
+      "high": 2592.1206,
+      "id": 58,
+      "index": "NEPSE Index",
+      "low": 2546.9463,
+      "perChange": -1.38,
+      "previousClose": 2558.3535
+    },
+    {
+      "auditId": null,
+      "change": -2.61,
+      "close": 178.05,
+      "currentValue": 175.43,
+      "exchangeIndexId": null,
+      "fiftyTwoWeekHigh": 204.21,
+      "fiftyTwoWeekLow": 170.58,
+      "generatedTime": "2026-08-26T15:20:05.227",
+      "high": 177.8329,
+      "id": 62,
+      "index": "Float Index",
+      "low": 174.6415,
+      "perChange": -1.47,
+      "previousClose": 175.432
+    },
+    {
+      "auditId": null,
+      "change": -2.09,
+      "close": 154.61,
+      "currentValue": 152.51,
+      "exchangeIndexId": null,
+      "fiftyTwoWeekHigh": 173.41,
+      "fiftyTwoWeekLow": 147.61,
+      "generatedTime": "2026-08-26T15:20:05.227",
+      "high": 154.6348,
+      "id": 63,
+      "index": "Sensitive Float Index",
+      "low": 151.9175,
+      "perChange": -1.35,
+      "previousClose": 152.5111
+    }
+  ],
+  "market_status": {
+    "asOf": "2026-08-26T15:00:00",
+    "id": 80,
+    "isOpen": "CLOSE"
+  },
+  "sub_indices": [
+    {
+      "change": -40.7,
+      "currentValue": 4412.62,
+      "id": 64,
+      "index": "Microfinance Index",
+      "perChange": -0.91
+    },
+    {
+      "change": -175.13,
+      "currentValue": 11313.14,
+      "id": 65,
+      "index": "Life Insurance",
+      "perChange": -1.52
+    },
+    {
+      "change": -0.12,
+      "currentValue": 20.31,
+      "id": 66,
+      "index": "Mutual Fund",
+      "perChange": -0.61
+    },
+    {
+      "change": -1.24,
+      "currentValue": 93.8,
+      "id": 67,
+      "index": "Investment Index",
+      "perChange": -1.31
+    },
+    {
+      "change": -10.66,
+      "currentValue": 1426.46,
+      "id": 51,
+      "index": "Banking SubIndex",
+      "perChange": -0.74
+    },
+    {
+      "change": -39.09,
+      "currentValue": 7123.35,
+      "id": 52,
+      "index": "Hotels And Tourism Index",
+      "perChange": -0.54
+    },
+    {
+      "change": -27.16,
+      "currentValue": 1858.18,
+      "id": 53,
+      "index": "Others Index",
+      "perChange": -1.44
+    },
+    {
+      "change": -104.33,
+      "currentValue": 3561.28,
+      "id": 54,
+      "index": "HydroPower Index",
+      "perChange": -2.84
+    },
+    {
+      "change": -45.94,
+      "currentValue": 5414.46,
+      "id": 55,
+      "index": "Development Bank Index",
+      "perChange": -0.84
+    },
+    {
+      "change": -41.44,
+      "currentValue": 10233.82,
+      "id": 56,
+      "index": "Manufacturing And Processing",
+      "perChange": -0.4
+    },
+    {
+      "change": -404.05,
+      "currentValue": 9935.59,
+      "id": 59,
+      "index": "Non Life Insurance",
+      "perChange": -3.9
+    },
+    {
+      "change": -25.23,
+      "currentValue": 2253.76,
+      "id": 60,
+      "index": "Finance Index",
+      "perChange": -1.1
+    },
+    {
+      "change": -1.55,
+      "currentValue": 3216.43,
+      "id": 61,
+      "index": "Trading Index",
+      "perChange": -0.04
+    }
+  ]
+}

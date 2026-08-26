@@ -1,77 +1,59 @@
-**NEPSE Daily Data**
+# NEPSE daily floorsheet and indices
 
-Auto-updating archive of daily NEPSE floorsheet and index data.
+Every trading day's complete floorsheet and index snapshot from the Nepal Stock
+Exchange, committed automatically after market close.
 
-**How it works**
+<!-- BEGIN GENERATED -->
 
-Every trading day after market close, a scheduled job fetches the day's floorsheet and index values from NEPSE and commits them here. The result is a free, versioned history of daily snapshots — useful for backtesting, audits, and diffing.
+**Latest trading day:** `2026-08-26`  
+**NEPSE Index:** 2,558.35 ▼ -1.38%  
+**Floorsheet rows that day:** 61,442  
+**Trading days in this repo:** 1 (from `2026-08-26`)  
+**Last updated:** 2026-08-26T10:25:48Z (2026-08-26 16:10:48 NPT)
 
-This repository holds **data only**. The fetcher that writes to it lives in a separate private repository and pushes here via a deploy key. Nothing here is edited by hand.
+<!-- END GENERATED -->
 
-**Structure**
+## Layout
 
-```
-└── data/
-    ├── floorsheet/YYYY-MM-DD.csv   # one row per trade
-    └── indices/YYYY-MM-DD.csv      # one row per index
-```
+| Path | What it holds |
+| --- | --- |
+| `floorsheet/<YYYY>/<YYYY-MM-DD>.csv.gz` | Every trade of that session, one row per contract |
+| `indices/<YYYY>/<YYYY-MM-DD>.json` | Raw API response for the main and sub indices |
+| `indices/daily.csv` | Append-only long series, one row per index per day |
+| `latest/floorsheet.csv.gz`, `latest/indices.json` | Most recent session, at a stable path |
+| `manifest.json` | Machine-readable summary of what is in here |
 
-Files are named by the business date NEPSE assigns the session, not by the date the job happened to run.
+## Floorsheet columns
 
-**Schedule**
+`contract_id`, `business_date`, `trade_time`, `stock_symbol`, `security_name`,
+`stock_id`, `buyer_member_id`, `buyer_broker_name`, `seller_member_id`,
+`seller_broker_name`, `contract_quantity`, `contract_rate`, `contract_amount`,
+`trade_book_id`
 
-Monday-Friday, the NEPSE trading week, shortly after the 15:00 NPT close. Holidays produce no commit — if a date is missing, the market did not trade that day.
-
-There is no backfill: the archive begins with the first successful run and grows forward.
-
-**Columns**
-
-`data/floorsheet/YYYY-MM-DD.csv` — one row per trade, sorted by `contractId`:
-
-| Column                                 | Notes                                           |
-| -------------------------------------- | ----------------------------------------------- |
-| `contractId`                         | unique per trade, ascending through the session |
-| `businessDate`                       | trading date                                    |
-| `tradeTime`                          | timestamp of the print                          |
-| `stockSymbol`                        | e.g.`NABIL`                                   |
-| `securityName`                       | full company name                               |
-| `buyerMemberId` / `sellerMemberId` | broker IDs                                      |
-| `contractQuantity`                   | shares                                          |
-| `contractRate`                       | price per share                                 |
-| `contractAmount`                     | quantity × rate                                |
-| `stockId`                            | NEPSE's internal security ID                    |
-| `tradeBookId`                        | NEPSE's internal trade ID                       |
-
-`data/indices/YYYY-MM-DD.csv` — one row per index, sorted by name:
-
-`businessDate`, `index`, `close`, `high`, `low`, `previousClose`, `change`, `perChange`, `fiftyTwoWeekHigh`, `fiftyTwoWeekLow`, `currentValue`
-
-Four indices are recorded: NEPSE Index, Sensitive Index, Float Index, Sensitive Float Index.
-
-**Using it**
+## Reading it
 
 ```python
 import pandas as pd
 
-trades = pd.read_csv("data/floorsheet/2026-08-26.csv")
-turnover = trades.groupby("stockSymbol")["contractAmount"].sum().sort_values(ascending=False)
+fs = pd.read_csv("floorsheet/2026/2026-08-26.csv.gz")          # gzip is inferred
+idx = pd.read_csv("indices/daily.csv", parse_dates=["business_date"])
+
+# Turnover by symbol for the session
+fs.groupby("stock_symbol")["contract_amount"].sum().sort_values(ascending=False).head(10)
+
+# NEPSE Index series
+idx[idx.index_name == "NEPSE Index"].set_index("business_date")["current_value"].plot()
 ```
 
-Or read a single day without cloning:
+## A note on index values
 
-```python
-BASE = "https://raw.githubusercontent.com/mazinod13/daily-floorsheet-and-indices/main"
-trades = pd.read_csv(f"{BASE}/data/floorsheet/2026-08-26.csv")
-```
+Use **`current_value`** as the day's closing level. NEPSE's API reports `close`
+and `previous_close` as *the previous session's* close on both fields, so they
+are preserved for completeness but are not the daily close. Sub-indices are
+served with a reduced field set (`current_value`, `change`, `per_change` only),
+so their `high`/`low`/52-week columns are empty.
 
-A full session is roughly 40,000 trades (~5 MB of CSV).
+## Source
 
-**Source**
-
-[nepalstock.com.np](https://www.nepalstock.com.np) 
-
-**License**
-
-The market data is NEPSE's. This repository only archives it, and redistributes it as-is with no warranty as to accuracy or completeness — do not rely on it for trading decisions without verifying against NEPSE directly. Check NEPSE's terms before any commercial use.
-
-Any code in this repository is MIT — see [LICENSE](LICENSE).
+Pulled from the official NEPSE API at <https://www.nepalstock.com.np>. This repo
+is generated data only; it is not affiliated with or endorsed by NEPSE.
