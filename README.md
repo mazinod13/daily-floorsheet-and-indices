@@ -37,8 +37,6 @@ better home for bulk files than a git repo:
 
 **[huggingface:urekmazino69](https://huggingface.co/datasets/urekmazino69/Nepse-floorsheet-and-indices)**
 
-**[huggingface.co/datasets/urekmazino69/Nepse-floorsheet-and-indices](https://huggingface.co/datasets/urekmazino69/Nepse-floorsheet-and-indices)**
-
 |                                    | Coverage                 | Files              |
 | ---------------------------------- | ------------------------ | ------------------ |
 | `floorsheet/<YYYY-MM-DD>.csv.gz` | 2024-01-02 → 2026-08-26 | 603 trading days   |
