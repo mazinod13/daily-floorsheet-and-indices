@@ -5,11 +5,11 @@ Exchange, committed automatically after market close.
 
 <!-- BEGIN GENERATED -->
 
-**Latest trading day:** `2026-08-31`  
-**NEPSE Index:** 2,513.42 ▼ -1.71%  
-**Trades that session:** 68,137  
-**Indices recorded:** 17 (4 main + 13 sub)  
-**Trading days archived:** 3 (from `2026-08-26`)  
+**Latest trading day:** `2026-08-31`
+**NEPSE Index:** 2,513.42 ▼ -1.71%
+**Trades that session:** 68,137
+**Indices recorded:** 17 (4 main + 13 sub)
+**Trading days archived:** 3 (from `2026-08-26`)
 **Last updated:** 2026-08-31T17:15:24Z (2026-08-31 23:00 NPT)
 
 <!-- END GENERATED -->
@@ -22,12 +22,52 @@ Exchange, committed automatically after market close.
 | `data/indices/<YYYY-MM-DD>.csv`    | Main and sub indices for that session, one row per index |
 
 Files are named by the business date NEPSE assigns the session, not by the date
-the job happened to run. A missing date means the market did not trade — there
-is no backfill, so the archive begins with the first successful run and grows
-forward.
+the job happened to run. A missing date means the market did not trade.
+
+This repo only grows forward from its first run. For everything before that, see
+[Historical data](#historical-data) below.
 
 Sessions run Sunday–Thursday and close at 15:00 NPT. A full day is around 60,000
 trades, roughly 12 MB of CSV.
+
+## Historical data
+
+Years of back history live in a companion dataset on Hugging Face, which is a
+better home for bulk files than a git repo:
+
+**[huggingface:urekmazino69](https://huggingface.co/datasets/urekmazino69/Nepse-floorsheet-and-indices)**
+
+**[huggingface.co/datasets/urekmazino69/Nepse-floorsheet-and-indices](https://huggingface.co/datasets/urekmazino69/Nepse-floorsheet-and-indices)**
+
+|                                    | Coverage                 | Files              |
+| ---------------------------------- | ------------------------ | ------------------ |
+| `floorsheet/<YYYY-MM-DD>.csv.gz` | 2024-01-02 → 2026-08-26 | 603 trading days   |
+| `indices/<YYYY-MM-DD>.csv.gz`    | 1997-07-20 → 2026-08-26 | 6,429 trading days |
+
+Gzipped CSV, one file per trading day, same date-based naming as this repo.
+
+```python
+import pandas as pd
+
+BASE = "https://huggingface.co/datasets/urekmazino69/Nepse-floorsheet-and-indices/resolve/main"
+fs = pd.read_csv(f"{BASE}/floorsheet/2024-01-02.csv.gz")   # gzip is inferred
+```
+
+> **The columns are not the same as this repo's.** The historical set was
+> assembled from a different source, so it uses `snake_case` names and a
+> different field set — `contract_no` not `contractId`, `calculation_date` not
+> `businessDate`, `sector` in place of `indexName`. It also *adds*
+> `turnover_values`, `turnover_volume` and `total_transaction`, and *lacks*
+> security names, broker names and NEPSE's internal IDs. Rename before
+> concatenating the two; do not assume `pd.concat` will line up.
+
+One quirk to handle on the historical indices: `percentage_change` changes
+format mid-series — values are strings like `-0.01%` up to 2026-01-20 and plain
+numbers like `-1.3100` after. Normalise on read:
+
+```python
+idx["percentage_change"] = idx["percentage_change"].astype(str).str.rstrip("%").astype(float)
+```
 
 ## Floorsheet columns
 

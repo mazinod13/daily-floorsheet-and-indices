@@ -16,3 +16,4 @@ local/
 .idea/
 .DS_Store
 Thumbs.db
+historical_data/
