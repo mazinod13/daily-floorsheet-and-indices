@@ -5,12 +5,12 @@ Exchange, committed automatically after market close.
 
 <!-- BEGIN GENERATED -->
 
-**Latest trading day:** `2026-10-08`  
-**NEPSE Index:** 2,574.65 ▲ +0.08%  
-**Trades that session:** 43,812  
+**Latest trading day:** `2026-10-09`  
+**NEPSE Index:** 2,591.80 ▲ +0.66%  
+**Trades that session:** 52,044  
 **Indices recorded:** 17 (4 main + 13 sub)  
-**Trading days archived:** 26 (from `2026-08-26`)  
-**Last updated:** 2026-10-08T16:59:28Z (2026-10-08 22:44 NPT)
+**Trading days archived:** 27 (from `2026-08-26`)  
+**Last updated:** 2026-10-09T16:38:39Z (2026-10-09 22:23 NPT)
 
 <!-- END GENERATED -->
 
